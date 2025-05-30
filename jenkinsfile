@@ -15,14 +15,12 @@ pipeline {
 
     stages {
         stage('Checkout') {
-    steps {
-        deleteDir()
-        git branch: 'main', url: 'https://github.com/AjaySurwase/Infra-K8s.git'
-    }
-}
-
+            steps {
+                deleteDir()
+                git branch: 'main', url: 'https://github.com/AjaySurwase/Infra-K8s.git'
+            }
         }
-    
+
         stage("Terraform Init") {
             steps {
                 sh "terraform init -reconfigure"
@@ -52,3 +50,4 @@ pipeline {
         }
     }
 }
+
