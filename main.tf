@@ -30,7 +30,7 @@ resource "aws_eks_node_group" "node-grp" {
   node_role_arn   = aws_iam_role.worker.arn
   subnet_ids      = ["subnet-0e8270635bc77fa25", "subnet-08df28d543b94573e"]
   capacity_type   = "ON_DEMAND"
-  disk_size       = "20"
+  disk_size       = 20
   instance_types  = ["t2.micro"]
   labels          = tomap({ env = "Prod" })
 
@@ -43,6 +43,7 @@ resource "aws_eks_node_group" "node-grp" {
   update_config {
     max_unavailable = 1
   }
+
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
