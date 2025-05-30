@@ -1,16 +1,11 @@
-data "aws_subnets" "available-subnets" {
-  filter {
-    name   = "tag:Name"
-    values = ["Our-Public-*"]
-  }
-}
+
 
 resource "aws_eks_cluster" "ankit-cluster" {
-  name     = "ankit-cluster"
+  name     = "PNC-cluster"
   role_arn = aws_iam_role.example.arn
 
   vpc_config {
-    subnet_ids = data.aws_subnets.available-subnets.ids
+    subnet_ids = ["subnet-0e8270635bc77fa25", "subnet-08df28d543b94573e"]
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
@@ -37,7 +32,7 @@ resource "aws_eks_node_group" "node-grp" {
   capacity_type   = "ON_DEMAND"
   disk_size       = "20"
   instance_types  = ["t2.micro"]
-  labels          = tomap({ env = "dev" })
+  labels          = tomap({ env = "Prod" })
 
   scaling_config {
     desired_size = 2
