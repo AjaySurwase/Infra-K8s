@@ -16,7 +16,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/AjaySurwase/Infra-K8s.git'
+            // Clean the workspace first
+            deleteDir()
+
+            // Then clone the latest repo
+            git 'https://github.com/AjaySurwase/Infra-K8s.git'
             }
         }
     
