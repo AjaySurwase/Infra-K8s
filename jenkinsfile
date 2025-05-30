@@ -15,13 +15,12 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            steps {
-            // Clean the workspace first
-            deleteDir()
+    steps {
+        deleteDir()
+        git branch: 'main', url: 'https://github.com/AjaySurwase/Infra-K8s.git'
+    }
+}
 
-            // Then clone the latest repo
-            git 'https://github.com/AjaySurwase/Infra-K8s.git'
-            }
         }
     
         stage("Terraform Init") {
